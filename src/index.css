@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 400; /* Regular */
+    font-style: normal;
+    src: url('./assets/fonts/Inter_18pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500; /* Medium */
+    font-style: normal;
+    src: url('./assets/fonts/Inter_18pt-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    src: url('./assets/fonts/Inter_18pt-Bold.ttf') format('truetype');
+}
+
+:root {
+    --text-black: rgb(33, 33, 33);
+    --bg-white: rgb(255, 255, 255);
+    --accent-blue: rgb(58, 123, 247);
+    --accent-red: rgb(234, 67, 53);
+    --accent-green: rgb(44, 160, 44);
+    --accent-gray: rgb(169, 169, 169);
+}
+
+body {
+    margin: 0;
+    padding: 0 20px;
+
+    transition: all 0.3s ease;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: var(--text-black);
+    background-color: var(--bg-white);
+}
+
+@media (max-width: 767px) {
+    body {
+        padding: 0 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        padding: 0 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    body {
+        padding: 0 20px;
+    }
+}
