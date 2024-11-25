@@ -1,12 +1,13 @@
 import {Route, Routes} from "react-router";
 
-import MainLayout from "./components/Layout/MainLayout.tsx";
-import MainPage from "./pages/MainPage.tsx";
-import SignInPage from "./pages/SignInPage.tsx";
-import SignUpPage from "./pages/SignUpPage.tsx";
-import HomeLayout from "./components/Layout/HomeLayout.tsx";
-import HomePage from "./pages/HomePage.tsx";
-import RouteNotFoundPage from "./pages/RouteNotFoundPage.tsx";
+import MainPage from "@pages/MainPage.tsx";
+import SignInPage from "@pages/SignInPage.tsx";
+import SignUpPage from "@pages/SignUpPage.tsx";
+import HomePage from "@pages/HomePage.tsx";
+import RouteNotFoundPage from "@pages/RouteNotFoundPage.tsx";
+
+import MainLayout from "@components/Layout/MainLayout.tsx";
+import HomeLayout from "@components/Layout/HomeLayout.tsx";
 
 const App = () => {
     return (

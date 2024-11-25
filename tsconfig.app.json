@@ -4,13 +4,16 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": [
-        "src/components/*"
+        "components/*"
       ],
       "@utils/*": [
-        "src/utils/*"
+        "utils/*"
       ],
       "@assets/*": [
-        "src/assets/*"
+        "assets/*"
+      ],
+      "@pages/*": [
+        "pages/*"
       ]
     },
     "target": "ES2020",
