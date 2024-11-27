@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useFormik } from 'formik';
+
 import CustomInput from '@components/UI/Form/input/CustomInput.tsx';
 import Button from '@components/UI/Button/Button.tsx';
 
-interface IProps {
-    onSubmit: () => void;
-    title: string;
+import { AuthSchema } from '@utils/schemas/authSchema.ts';
+
+enum EInputName {
+    EMAIL = 'email',
+    PASSWORD = 'password',
 }
 
-const AuthForm: React.FC<IProps> = ({ onSubmit, title }) => {
-    const [setEmail, setSetEmail] = useState('');
+interface IProps {
+    title: string;
+    type: 'sign-in' | 'sign-up';
+}
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-
-        setSetEmail(value);
-    };
+const AuthForm: React.FC<IProps> = ({ title, type }) => {
+    const authFormik = useFormik({
+        initialValues: {
+            [EInputName.EMAIL]: '',
+            [EInputName.PASSWORD]: '',
+        },
+        validationSchema: AuthSchema,
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    });
 
     return (
         <div
@@ -23,25 +35,71 @@ const AuthForm: React.FC<IProps> = ({ onSubmit, title }) => {
             }
         >
             <h2 className={'text-xl border-b border-accentGray'}>{title}</h2>
-            <form onSubmit={onSubmit} className={'flex flex-col flex-1 gap-2'}>
+            <form
+                onSubmit={authFormik.handleSubmit}
+                className={'flex flex-col flex-1 gap-2'}
+            >
                 <CustomInput
                     type={'email'}
                     label={'Email'}
+                    name={EInputName.EMAIL}
                     placeholder={'example@email.com'}
-                    value={setEmail}
-                    onChange={handleChange}
+                    value={authFormik.values.email}
+                    onChange={authFormik.handleChange}
+                    onBlur={authFormik.handleBlur}
+                    hasError={
+                        !!(authFormik.touched.email && authFormik.errors.email)
+                    }
+                    error={authFormik.errors.email}
                 />
                 <CustomInput
-                    type={'email'}
-                    label={'Email'}
-                    placeholder={'example@email.com'}
-                    value={setEmail}
-                    onChange={handleChange}
+                    type={'password'}
+                    label={'Password'}
+                    name={EInputName.PASSWORD}
+                    value={authFormik.values.password}
+                    onChange={authFormik.handleChange}
+                    onBlur={authFormik.handleBlur}
+                    hasError={
+                        !!(
+                            authFormik.touched.password &&
+                            authFormik.errors.password
+                        )
+                    }
+                    error={authFormik.errors.password}
                 />
                 <Button type={'submit'} mode={'primary'} className={'text-xl'}>
                     Create account
                 </Button>
             </form>
+            <div className={'flex gap-1 flex-1 p-2'}>
+                {type === 'sign-in' ? (
+                    <>
+                        <p>Don’t have an account?</p>
+                        <Button
+                            type={'button'}
+                            mode={'neutral'}
+                            className={
+                                'text-sm text-accentBlue underline hover:text-hover'
+                            }
+                        >
+                            Sign up now!
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <p>Already have an account?</p>
+                        <Button
+                            type={'button'}
+                            mode={'neutral'}
+                            className={
+                                'text-sm text-accentBlue underline hover:text-hover'
+                            }
+                        >
+                            Log in to continue.
+                        </Button>
+                    </>
+                )}
+            </div>
         </div>
     );
 };

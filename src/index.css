@@ -24,14 +24,14 @@
 }
 
 :root {
-    --text-black: rgb(33, 33, 33);
-    --bg-white: rgb(255, 255, 255);
-    --accent-blue: rgb(59 130 246);
-    --hover: rgb(25, 37, 98);
-    --accent-red: rgb(136, 41, 32);
-    --accent-green: rgb(44, 160, 44);
-    --accent-gray: rgb(169, 169, 169);
-    --accent-white: var(--bg-white);
+    --text-black: #212121;
+    --bg-white: #FFFFFF;
+    --accent-blue: #3B82F6;
+    --hover: #191B62;
+    --accent-red: #881A20;
+    --accent-green: #2CA828;
+    --accent-gray: #A9A9A9;
+    --accent-white: #FFFFFF;
 }
 
 body {
