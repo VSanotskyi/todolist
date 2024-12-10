@@ -29,7 +29,7 @@ const Button: React.FC<IProps> = ({
         return (
             <button
                 type={type}
-                className={`w-full px-4 py-2 border rounded-md border-accentBlue text-accentBlue hover:border-hover hover:bg-hover hover:text-accentWhite ${className}`}
+                className={`w-full px-4 py-2 border rounded-md border-acc-blue text-acc-blue hover:border-cl-hover hover:bg-cl-hover hover:text-white ${className}`}
                 onClick={onClick}
             >
                 {children}
@@ -41,7 +41,7 @@ const Button: React.FC<IProps> = ({
         <button
             onClick={onClick}
             type={type}
-            className={`w-full px-4 py-2 border rounded-md border-accentBlue bg-accentBlue text-accentWhite hover:border-hover hover:bg-hover ${className}`}
+            className={`w-full px-4 py-2 border rounded-md border-acc-blue bg-acc-blue text-white hover:border-cl-hover hover:bg-cl-hover ${className}`}
         >
             {children}
         </button>

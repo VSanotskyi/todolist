@@ -24,11 +24,11 @@
 }
 
 :root {
-    --text-black: #212121;
-    --bg-white: #FFFFFF;
+    --black: #212121;
+    --white: #FFFFFF;
     --accent-blue: #3B82F6;
     --hover: #191B62;
-    --accent-red: #881A20;
+    --accent-red: #a80404;
     --accent-green: #2CA828;
     --accent-gray: #A9A9A9;
     --accent-white: #FFFFFF;
@@ -46,8 +46,8 @@ body {
     font-size: 16px;
     line-height: 1.6;
 
-    color: var(--text-black);
-    background-color: var(--bg-white);
+    color: var(--black);
+    background-color: var(--white);
 }
 
 @media (max-width: 767px) {

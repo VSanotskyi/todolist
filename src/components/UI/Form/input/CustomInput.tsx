@@ -65,7 +65,7 @@ const CustomInput: React.FC<IProps> = ({
                         </Button>
                     )}
                 </div>
-                {error && <p className={'text-sm text-accentRed'}>{error}</p>}
+                {error && <p className={'text-sm text-acc-red'}>{error}</p>}
             </label>
         </div>
     );

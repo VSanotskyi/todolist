@@ -1,11 +1,7 @@
-import AuthForm from '@components/UI/Form/AuthForm.tsx';
+import SignIn from '@components/Auth/SignIn.tsx';
 
 const SignInPage = () => {
-    return (
-        <div className={'flex justify-center items-center w-full h-full p-8'}>
-            <AuthForm type={'sign-in'} title={'Welcome back!'} />
-        </div>
-    );
+    return <SignIn />;
 };
 
 export default SignInPage;
