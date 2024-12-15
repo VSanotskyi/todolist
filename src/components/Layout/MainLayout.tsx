@@ -2,6 +2,8 @@ import { Outlet, useNavigate } from 'react-router';
 
 import Header from '@components/UI/Header/Header.tsx';
 import Button from '@components/UI/Button/Button.tsx';
+import { useAuth } from '../../hooks/useAuth.ts';
+import { useEffect } from 'react';
 
 const MOCK_DATA = [
     {
@@ -18,9 +20,17 @@ const MOCK_DATA = [
 
 const MainLayout = () => {
     const navigate = useNavigate();
+    const { isSession } = useAuth();
+
     const handleNavigate = (link: string) => {
         navigate(link);
     };
+
+    useEffect(() => {
+        if (isSession) {
+            navigate('/home');
+        }
+    }, [isSession, navigate]);
 
     return (
         <>

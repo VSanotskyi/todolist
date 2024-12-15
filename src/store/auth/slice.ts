@@ -1,16 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { MESSAGE, STATUS } from '@utils/enum/apiEnum.ts';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { authThunk } from './thunk.ts';
+import { strings } from '@utils/constants/strings.ts';
+
+enum STATUS {
+    IDLE = 'idle',
+    PENDING = 'pending',
+    FULFILLED = 'fulfilled',
+    REJECTED = 'rejected',
+}
+
+type Action = {
+    IDLE: string;
+    SIGN_UP: string;
+    SIGN_IN: string;
+    SIGN_OUT: string;
+};
+
+type ActionKey = keyof Action;
+
+type ActionValue = Action[ActionKey];
 
 interface IInitialState {
+    action: ActionValue;
     status: STATUS;
-    message: MESSAGE;
-    httpStatus: number | null;
+    message: string | null;
+    user: {
+        _id: string;
+        email: string;
+    } | null;
 }
 
 const initialState: IInitialState = {
     status: STATUS.IDLE,
-    message: MESSAGE.IDLE,
-    httpStatus: null,
+    action: 'IDLE',
+    message: null,
+    user: null,
 };
 
 const authSlice = createSlice({
@@ -18,27 +42,39 @@ const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addMatcher(
-            (action) => action.type.endsWith('/pending'),
-            (state) => {
-                state.status = STATUS.LOADING;
-                state.message = MESSAGE.IDLE;
-            }
-        );
-        builder.addMatcher(
-            (action) => action.type.endsWith('/fulfilled'),
-            (state) => {
-                state.status = STATUS.SUCCESS;
-                state.message = MESSAGE.SUCCESS;
-            }
-        );
-        builder.addMatcher(
-            (action) => action.type.endsWith('/rejected'),
-            (state) => {
-                state.status = STATUS.ERROR;
-                state.message = MESSAGE.ERROR;
-            }
-        );
+        builder
+            .addCase(authThunk.signUpThunk.fulfilled, (state, action) => {
+                state.action = strings.ACTION_AUTH.SIGN_UP;
+                state.status = STATUS.FULFILLED;
+                state.message = action.payload.message;
+                state.user = action.payload.user;
+            })
+            .addCase(authThunk.signInThunk.fulfilled, (state, action) => {
+                state.action = strings.ACTION_AUTH.SIGN_IN;
+                state.status = STATUS.FULFILLED;
+                state.message = action.payload.message;
+                state.user = action.payload.user;
+            })
+            .addCase(authThunk.signOutThunk.fulfilled, (state, action) => {
+                state.action = strings.ACTION_AUTH.SIGN_OUT;
+                state.status = STATUS.FULFILLED;
+                state.message = action.payload;
+                state.user = null;
+            })
+            .addMatcher(
+                (action) => action.type.endsWith('/pending'),
+                (state) => {
+                    state.status = STATUS.PENDING;
+                    state.action = strings.ACTION_AUTH.SIGN_IN;
+                }
+            )
+            .addMatcher(
+                (action) => action.type.endsWith('/rejected'),
+                (state, action: PayloadAction<string>) => {
+                    state.status = STATUS.REJECTED;
+                    state.message = action.payload;
+                }
+            );
     },
 });
 

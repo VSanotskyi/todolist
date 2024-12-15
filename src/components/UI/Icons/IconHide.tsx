@@ -1,7 +1,7 @@
 import React from 'react';
-import { IconType } from '@utils/types/iconType.ts';
+import { IconInterface } from '@utils/types/iconInterface.ts';
 
-const IconHide: React.FC<IconType> = ({ width = '16', height = '16' }) => {
+const IconHide: React.FC<IconInterface> = ({ width = '16', height = '16' }) => {
     return (
         <svg
             version="1.1"

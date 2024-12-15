@@ -1,24 +1,30 @@
+import React from 'react';
 import { useFormik } from 'formik';
 
 import Form from '@components/UI/Form/Form.tsx';
 import CustomInput from '@components/UI/Form/input/CustomInput.tsx';
 
 import { AuthSchema } from '@utils/schemas/authSchema.ts';
+import { IAuthReq } from '@utils/types/authInterfaces.ts';
 
 enum EInputName {
     EMAIL = 'email',
     PASSWORD = 'password',
 }
 
-const SignIn = () => {
+interface IProps {
+    onSubmit: (dto: IAuthReq) => Promise<void>;
+}
+
+const SignIn: React.FC<IProps> = ({ onSubmit }) => {
     const signInFormik = useFormik({
         initialValues: {
             [EInputName.EMAIL]: '',
             [EInputName.PASSWORD]: '',
         },
         validationSchema: AuthSchema,
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            await onSubmit(values);
         },
     });
 
