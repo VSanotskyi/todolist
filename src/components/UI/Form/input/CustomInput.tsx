@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Button from '@components/UI/Button/Button.tsx';
 import IconHide from '@components/UI/Icons/IconHide.tsx';
 import IconShow from '@components/UI/Icons/IconShow.tsx';
@@ -46,7 +47,7 @@ const CustomInput: React.FC<IProps> = ({
                         placeholder={placeholder}
                         onChange={onChange}
                         onBlur={onBlur}
-                        className={` flex-1 outline-none p-2 rounded border border-accentGray hover:border-accentBlue focus:border-accentBlue ${hasError ? 'border-accentRed' : ''}`}
+                        className={`w-full outline-none p-2 rounded border border-accentGray hover:border-accentBlue focus:border-accentBlue ${hasError ? 'border-accentRed' : ''}`}
                     />
                     {type === 'password' && (
                         <Button

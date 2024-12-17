@@ -1,25 +1,27 @@
 import { Outlet, useNavigate } from 'react-router';
 
 import Header from '@components/UI/Header/Header.tsx';
-import Button from '@components/UI/Button/Button.tsx';
 import { useAuth } from '../../hooks/useAuth.ts';
 import { useEffect } from 'react';
+import { routesList } from '@utils/constants/routesList.ts';
+import { useScreenSize } from '../../hooks/useScreenSize.ts';
+import Nav from '@components/UI/Nav';
+import Dropdown from '@components/UI/Dropdown';
 
 const MOCK_DATA = [
     {
-        id: 1,
         title: 'Sign-in',
-        link: '/sign-in',
+        href: '/sign-in',
     },
     {
-        id: 2,
         title: 'Sign-up',
-        link: '/sign-up',
+        href: '/sign-up',
     },
 ];
 
 const MainLayout = () => {
     const navigate = useNavigate();
+    const screenSize = useScreenSize();
     const { isSession } = useAuth();
 
     const handleNavigate = (link: string) => {
@@ -28,30 +30,18 @@ const MainLayout = () => {
 
     useEffect(() => {
         if (isSession) {
-            navigate('/home');
+            navigate(routesList.HOME);
         }
     }, [isSession, navigate]);
 
     return (
         <>
             <Header>
-                <nav>
-                    <ul className={'flex gap-2'}>
-                        {MOCK_DATA.map((item) => (
-                            <li key={item.id}>
-                                <Button
-                                    type={'button'}
-                                    mode={
-                                        item.id === 1 ? 'secondary' : 'primary'
-                                    }
-                                    onClick={() => handleNavigate(item.link)}
-                                >
-                                    {item.title}
-                                </Button>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
+                {screenSize === 'mobile' ? (
+                    <Dropdown onNavigate={handleNavigate} links={MOCK_DATA} />
+                ) : (
+                    <Nav onNavigate={handleNavigate} links={MOCK_DATA} />
+                )}
             </Header>
             <Outlet />
         </>
